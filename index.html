@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Pysac : Python interface to the Seismic Analysis Code (SAC) file format.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Pysac</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jkmacc-LANL/pysac">View on GitHub</a>
+
+          <h1 id="project_title">Pysac</h1>
+          <h2 id="project_tagline">Python interface to the Seismic Analysis Code (SAC) file format.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jkmacc-LANL/pysac/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jkmacc-LANL/pysac/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Pysac is largely re-written from the obspy.io.sac module, with the intention of
+eventually replacing it.</p>
+
+<h2>
+<a id="goals" class="anchor" href="#goals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goals</h2>
+
+<ol>
+<li>Expose the file format in a way that is intuitive to SAC users and to Python
+programmers</li>
+<li>Maintaining header validity when converting between ObsPy Traces.</li>
+</ol>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ol>
+<li>
+<strong>Read and write SAC binary or ASCII</strong>
+
+<ul>
+<li>autodetect or specify expected byteorder</li>
+<li>optional file size checking and/or header consistency checks</li>
+<li>header-only reading and writing</li>
+<li>"overwrite OK" checking ('lovrok' header)</li>
+</ul>
+</li>
+<li><strong>Convenient access and manipulation of relative and absolute time headers</strong></li>
+<li><strong>User-friendly header printing/viewing</strong></li>
+<li>
+<strong>Fast access to header values from attributes</strong>
+
+<ul>
+<li>With type checking, null handling, and enumerated value checking</li>
+</ul>
+</li>
+<li>
+<strong>Convert to/from ObsPy Traces</strong>
+
+<ul>
+<li>Conversion from ObsPy Trace to SAC trace retains detected previous SAC header values.</li>
+<li>Conversion to ObsPy Trace retains the <em>complete</em> SAC header.</li>
+</ul>
+</li>
+</ol>
+
+<h2>
+<a id="usage-examples" class="anchor" href="#usage-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage examples:</h2>
+
+<h3>
+<a id="readwrite-sac-files" class="anchor" href="#readwrite-sac-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Read/write SAC files</h3>
+
+<div class="highlight highlight-python"><pre><span class="pl-c"># read from a binary file</span>
+sac <span class="pl-k">=</span> SACTrace.read(filename)
+
+<span class="pl-c"># read header only</span>
+sac <span class="pl-k">=</span> SACTrace.read(filename, <span class="pl-smi">headonly</span><span class="pl-k">=</span><span class="pl-c1">True</span>)
+
+<span class="pl-c"># write header-only, file must exist</span>
+sac.write(filename, <span class="pl-smi">headonly</span><span class="pl-k">=</span><span class="pl-c1">True</span>)
+
+<span class="pl-c"># read from an ASCII file</span>
+sac <span class="pl-k">=</span> SACTrace.read(filename, <span class="pl-smi">ascii</span><span class="pl-k">=</span><span class="pl-c1">True</span>)
+
+<span class="pl-c"># write a binary SAC file for a Sun machine</span>
+sac.write(filename, <span class="pl-smi">byteorder</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>big<span class="pl-pds">'</span></span>)</pre></div>
+
+<h3>
+<a id="reference-time-and-relative-time-headers" class="anchor" href="#reference-time-and-relative-time-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reference-time and relative time headers</h3>
+
+<div class="highlight highlight-python"><pre>sac <span class="pl-k">=</span> SACTrace(<span class="pl-smi">nzyear</span><span class="pl-k">=</span><span class="pl-c1">2000</span>, <span class="pl-smi">nzjday</span><span class="pl-k">=</span><span class="pl-c1">1</span>, <span class="pl-smi">nzhour</span><span class="pl-k">=</span><span class="pl-c1">0</span>, <span class="pl-smi">nzmin</span><span class="pl-k">=</span><span class="pl-c1">0</span>, <span class="pl-smi">nzsec</span><span class="pl-k">=</span><span class="pl-c1">0</span>, <span class="pl-smi">nzmsec</span><span class="pl-k">=</span><span class="pl-c1">0</span>,
+               <span class="pl-smi">t1</span><span class="pl-k">=</span><span class="pl-c1">23.5</span>, <span class="pl-smi">data</span><span class="pl-k">=</span>numpy.arange(<span class="pl-c1">100</span>))
+
+sac.reftime
+sac.b, sac.e, sac.t1</pre></div>
+
+<pre><code>2000-01-01T00:00:00.000000Z
+(0.0, 99.0, 23.5)
+</code></pre>
+
+<p>Move reference time by relative seconds, relative time headers are preserved.</p>
+
+<div class="highlight highlight-python"><pre>sac.reftime <span class="pl-k">-=</span> <span class="pl-c1">2.5</span>
+sac.b, sac.e, sac.t1</pre></div>
+
+<pre><code>(2.5, 101.5, 26.0)
+</code></pre>
+
+<p>Set reference time to new absolute time, relative time headers are preserved.</p>
+
+<div class="highlight highlight-python"><pre>sac.reftime <span class="pl-k">=</span> UTCDateTime(<span class="pl-c1">2000</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">0</span>, <span class="pl-c1">2</span>, <span class="pl-c1">0</span>, <span class="pl-c1">0</span>)
+sac.b, sac.e</pre></div>
+
+<pre><code>(-120.0, -21.0, -96.5)
+</code></pre>
+
+<h3>
+<a id="quick-header-viewing" class="anchor" href="#quick-header-viewing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick header viewing</h3>
+
+<p>Print non-null header values.</p>
+
+<div class="highlight highlight-python"><pre>sac <span class="pl-k">=</span> SACTrace()
+<span class="pl-k">print</span> sac</pre></div>
+
+<pre><code>Reference Time = 01/01/2000 (001) 00:00:00.000000
+    iztype IB: begin time
+b          = 0.0
+cmpaz      = 0.0
+cmpinc     = 0.0
+delta      = 1.0
+e          = 99.0
+iftype     = itime
+internal0  = 2.0
+iztype     = ib
+kcmpnm     = Z
+lcalda     = False
+leven      = True
+lovrok     = True
+lpspol     = True
+npts       = 100
+nvhdr      = 6
+nzhour     = 0
+nzjday     = 1
+nzmin      = 0
+nzmsec     = 0
+nzsec      = 0
+nzyear     = 2000
+</code></pre>
+
+<p>Print relative time header values.</p>
+
+<div class="highlight highlight-python"><pre>sac.lh(<span class="pl-s"><span class="pl-pds">'</span>picks<span class="pl-pds">'</span></span>)</pre></div>
+
+<pre><code>Reference Time = 01/01/1970 (001) 00:00:00.000000
+    iztype IB: begin time
+    a          = None
+    b          = 0.0
+    e          = 0.0
+    f          = None
+    o          = None
+    t0         = None
+    t1         = None
+    t2         = None
+    t3         = None
+    t4         = None
+    t5         = None
+    t6         = None
+    t7         = None
+    t8         = None
+    t9         = None
+</code></pre>
+
+<h3>
+<a id="header-values-as-attributes" class="anchor" href="#header-values-as-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Header values as attributes</h3>
+
+<p>Great for interactive use, with (ipython) tab-completion...</p>
+
+<div class="highlight highlight-python"><pre>sac.<span class="pl-k">&lt;</span>tab<span class="pl-k">&gt;</span></pre></div>
+
+<pre><code>sac.a                 sac.kevnm             sac.nzsec
+sac.az                sac.kf                sac.nzyear
+sac.b                 sac.khole             sac.o
+sac.baz               sac.kinst             sac.odelta
+sac.byteorder         sac.knetwk            sac.read
+sac.cmpaz             sac.ko                sac.reftime
+sac.cmpinc            sac.kstnm             sac.scale
+sac.copy              sac.kt0               sac.stdp
+sac.data              sac.kt1               sac.stel
+sac.delta             sac.kt2               sac.stla
+sac.depmax            sac.kt3               sac.stlo
+sac.depmen            sac.kt4               sac.t0
+sac.depmin            sac.kt5               sac.t1
+sac.dist              sac.kt6               sac.t2
+sac.e                 sac.kt7               sac.t3
+sac.evdp              sac.kt8               sac.t4
+sac.evla              sac.kt9               sac.t5
+sac.evlo              sac.kuser0            sac.t6
+sac.f                 sac.kuser1            sac.t7
+sac.from_obspy_trace  sac.kuser2            sac.t8
+sac.gcarc             sac.lcalda            sac.t9
+sac.idep              sac.leven             sac.to_obspy_trace
+sac.ievreg            sac.lh                sac.unused23
+sac.ievtyp            sac.listhdr           sac.user0
+sac.iftype            sac.lovrok            sac.user1
+sac.iinst             sac.lpspol            sac.user2
+sac.imagsrc           sac.mag               sac.user3
+sac.imagtyp           sac.nevid             sac.user4
+sac.internal0         sac.norid             sac.user5
+sac.iqual             sac.npts              sac.user6
+sac.istreg            sac.nvhdr             sac.user7
+sac.isynth            sac.nwfid             sac.user8
+sac.iztype            sac.nzhour            sac.user9
+sac.ka                sac.nzjday            sac.validate
+sac.kcmpnm            sac.nzmin             sac.write
+sac.kdatrd            sac.nzmsec
+</code></pre>
+
+<p>...and documentation!</p>
+
+<div class="highlight highlight-python"><pre>sac.iztype?</pre></div>
+
+<pre><code>Type:        property
+String form: &lt;property object at 0x106404940&gt;
+Docstring:
+I    Reference time equivalence:
+* IUNKN (5): Unknown
+* IB (9): Begin time
+* IDAY (10): Midnight of reference GMT day
+* IO (11): Event origin time
+* IA (12): First arrival time
+* ITn (13-22): User defined time pick n, n=0,9
+</code></pre>
+
+<h3>
+<a id="convert-tofrom-obspy-traces" class="anchor" href="#convert-tofrom-obspy-traces" aria-hidden="true"><span class="octicon octicon-link"></span></a>Convert to/from ObsPy Traces</h3>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">from</span> obspy <span class="pl-k">import</span> read
+tr <span class="pl-k">=</span> read()[<span class="pl-c1">0</span>]
+<span class="pl-k">print</span> tr.stats</pre></div>
+
+<pre><code>         network: BW
+         station: RJOB
+        location: 
+         channel: EHZ
+       starttime: 2009-08-24T00:20:03.000000Z
+         endtime: 2009-08-24T00:20:32.990000Z
+   sampling_rate: 100.0
+           delta: 0.01
+            npts: 3000
+           calib: 1.0
+    back_azimuth: 100.0
+     inclination: 30.0
+</code></pre>
+
+<div class="highlight highlight-python"><pre>sac <span class="pl-k">=</span> SACTrace.from_obspy_trace(tr)
+<span class="pl-k">print</span> sac</pre></div>
+
+<pre><code>Reference Time = 08/24/2009 (236) 00:20:03.000000
+    iztype IB: begin time
+b          = 0.0
+cmpaz      = 0.0
+cmpinc     = 0.0
+delta      = 0.00999999977648
+depmax     = 1293.77099609
+depmen     = -4.49556303024
+depmin     = -1515.81311035
+e          = 29.9899993297
+iftype     = itime
+internal0  = 2.0
+iztype     = ib
+kcmpnm     = EHZ
+knetwk     = BW
+kstnm      = RJOB
+lcalda     = False
+leven      = True
+lovrok     = True
+lpspol     = True
+npts       = 3000
+nvhdr      = 6
+nzhour     = 0
+nzjday     = 236
+nzmin      = 20
+nzmsec     = 0
+nzsec      = 3
+nzyear     = 2009
+scale      = 1.0
+</code></pre>
+
+<div class="highlight highlight-python"><pre>tr2 <span class="pl-k">=</span> sac.to_obspy_trace()
+<span class="pl-k">print</span> tr2.stats</pre></div>
+
+<pre><code>         network: BW
+         station: RJOB
+        location:
+         channel: EHZ
+       starttime: 2009-08-24T00:20:03.000000Z
+         endtime: 2009-08-24T00:20:32.990000Z
+   sampling_rate: 100.0
+           delta: 0.01
+            npts: 3000
+           calib: 1.0
+             sac: AttribDict({'cmpaz': 0.0, 'nzyear': 2009, 'nzjday': 236,
+             'iztype': 9, 'evla': 0.0, 'nzhour': 0, 'lcalda': 0, 'evlo': 0.0,
+             'scale': 1.0, 'nvhdr': 6, 'depmin': -1515.8131, 'kcmpnm': 'EHZ',
+             'nzsec': 3, 'internal0': 2.0, 'depmen': -4.495563, 'cmpinc': 0.0,
+             'depmax': 1293.771, 'iftype': 1, 'delta': 0.0099999998, 'nzmsec':
+             0, 'lpspol': 1, 'b': 0.0, 'e': 29.99, 'leven': 1, 'kstnm': 'RJOB',
+             'nzmin': 20, 'lovrok': 1, 'npts': 3000, 'knetwk': 'BW'})
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Pysac maintained by <a href="https://github.com/jkmacc-LANL">jkmacc-LANL</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
