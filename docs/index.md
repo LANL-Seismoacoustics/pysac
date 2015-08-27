@@ -21,7 +21,7 @@
     - Conversion from ObsPy Trace to SAC trace retains detected previous SAC header values.
     - Conversion to ObsPy Trace retains the *complete* SAC header.
 
-## Usage examples:
+## Usage examples
 
 ### Read/write SAC files
 ```python
