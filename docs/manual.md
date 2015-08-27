@@ -1,4 +1,4 @@
-# Manual
+# Package Organization
 
 ## pysac.header
 
@@ -33,7 +33,8 @@ based checking routines are provided for additional checks where desired.
 
 ## pysac.sactrace
 
-Object-oriented interface to the SAC file format.
+Contain the SACTrace class, which is the main user-facing interface to the SAC
+file format.
 
 The SACTrace object maintains consistency between SAC headers and manages
 header values in a user-friendly way. This includes some value-checking, native
