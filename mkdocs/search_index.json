@@ -61,7 +61,7 @@
             "title": "ObsPy"
         }, 
         {
-            "location": "/LICENSE/index.html", 
+            "location": "/license/index.html", 
             "text": "Copyright 2015. Los Alamos National Security, LLC for pysac LA-CC-15-051. This\nmaterial was produced under U.S. Government contract DE-AC52-06NA25396 for Los\nAlamos National Laboratory (LANL), which is operated by Los Alamos National\nSecurity, LLC for the U.S. Department of Energy. The U.S. Government has rights\nto use, reproduce, and distribute this software.  NEITHER THE GOVERNMENT NOR\nLOS ALAMOS NATIONAL SECURITY, LLC MAKES ANY WARRANTY, EXPRESS OR IMPLIED, OR\nASSUMES ANY LIABILITY FOR THE USE OF THIS SOFTWARE.  If software is modified to\nproduce derivative works, such modified software should be clearly marked, so\nas not to confuse it with the version available from LANL.\n\n\nAdditionally, this library is free software; you can redistribute it and/or\nmodify it under the terms of the GNU Lesser General Public License, v. 3., as\npublished by the Free Software Foundation. Accordingly, this library is\ndistributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;\nwithout even the implied warranty of MERCHANTABILITY or FITNESS FOR A\nPARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.", 
             "title": "License"
         }
