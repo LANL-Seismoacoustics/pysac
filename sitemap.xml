@@ -3,7 +3,7 @@
 
     
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//</loc>
+     <loc>http://jkmacc-lanl.github.io/pysac//index.html</loc>
      <lastmod>2015-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -11,7 +11,7 @@
 
     
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//manual/</loc>
+     <loc>http://jkmacc-lanl.github.io/pysac//manual/index.html</loc>
      <lastmod>2015-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -20,13 +20,13 @@
     
         
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//obspy/</loc>
+     <loc>http://jkmacc-lanl.github.io/pysac//obspy/index.html</loc>
      <lastmod>2015-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//LICENSE/</loc>
+     <loc>http://jkmacc-lanl.github.io/pysac//LICENSE/index.html</loc>
      <lastmod>2015-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
