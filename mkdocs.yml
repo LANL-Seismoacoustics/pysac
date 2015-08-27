@@ -9,7 +9,7 @@ markdown_extensions:
 docs_dir: 'docs'
 pages:
 - Introduction: 'index.md'
-- Tutorial: 'tutorial.md'
+- Manual: 'manual.md'
 - About:
     - 'ObsPy': 'obspy.md'
     - 'License': 'LICENSE.txt'
