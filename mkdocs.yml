@@ -1,0 +1,15 @@
+site_name: PySAC
+site_url: http://jkmacc-lanl.github.io/pysac/
+repo_url: https://github.com/jkmacc-LANL/pysac
+site_description: Python interface to the Seismic Analysis Code (SAC) file format.
+theme: readthedocs
+markdown_extensions:
+    - toc:
+        permalink: True
+docs_dir: 'docs'
+pages:
+- Introduction: 'index.md'
+- Tutorial: 'tutorial.md'
+- About:
+    - 'ObsPy': 'obspy.md'
+    - 'License': 'LICENSE.txt'
