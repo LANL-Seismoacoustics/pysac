@@ -12,5 +12,5 @@ pages:
 - Introduction: 'index.md'
 - Manual: 'manual.md'
 - About:
-    - 'ObsPy': 'obspy.md'
     - 'License': 'license.md'
+    - 'ObsPy': 'obspy.md'
