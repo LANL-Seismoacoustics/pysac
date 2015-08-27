@@ -1,5 +1,15 @@
 # PySAC
 
+Python interface to the [Seismic Analysis
+Code](http://ds.iris.edu/files/sac-manual/) (SAC) file format.  
+
+File-type support:
+
+* little and big-endian binary format
+* alphanumeric format
+* evenly-sampled data
+* time-series, not spectra
+
 ## Goals
 
 1. Expose the file format in a way that is intuitive to SAC users and to Python
