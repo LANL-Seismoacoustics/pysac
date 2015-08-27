@@ -27,13 +27,13 @@
         }, 
         {
             "location": "/manual/index.html", 
-            "text": "Manual\n\n\npysac.header\n\n\nSAC header specification, including documentation.\n\n\nHeader names, order, and types, nulls, as well as allowed enumerated values, are\nspecified here.  Header name strings, and their array order are contained in\nseparate float, int, and string tuples.  Enumerated values, and their allowed\nstring and integer values, are in dictionaries.  Header value documentation is\nin a dictionary, for reuse throughout the package.\n\n\npysac.util\n\n\nSAC module helper functions and data.\n\n\npysac.arrayio\n\n\nLow-level array interface to the SAC file format.\n\n\nFunctions in this module work directly with numpy arrays that mirror the SAC\nformat.  The 'primitives' in this module are the float, int, and string header\narrays, the float data array, and a header dictionary. Convenience functions\nare provided to convert between header arrays and more user-friendly\ndictionaries.\n\n\nThese read/write routines are very literal; there is almost no value or type\nchecking, except for byteorder and header/data array length.  File- and array-\nbased checking routines are provided for additional checks where desired.\n\n\npysac.sactrace\n\n\nObject-oriented interface to the SAC file format.\n\n\nThe SACTrace object maintains consistency between SAC headers and manages\nheader values in a user-friendly way. This includes some value-checking, native\nPython logicals (True, False) and nulls (None) instead of SAC's 0, 1, or -12345...\n\n\nSAC headers are implemented as properties, with appropriate getters and setters.", 
+            "text": "Package Organization\n\n\npysac.header\n\n\nSAC header specification, including documentation.\n\n\nHeader names, order, and types, nulls, as well as allowed enumerated values, are\nspecified here.  Header name strings, and their array order are contained in\nseparate float, int, and string tuples.  Enumerated values, and their allowed\nstring and integer values, are in dictionaries.  Header value documentation is\nin a dictionary, for reuse throughout the package.\n\n\npysac.util\n\n\nSAC module helper functions and data.\n\n\npysac.arrayio\n\n\nLow-level array interface to the SAC file format.\n\n\nFunctions in this module work directly with numpy arrays that mirror the SAC\nformat.  The 'primitives' in this module are the float, int, and string header\narrays, the float data array, and a header dictionary. Convenience functions\nare provided to convert between header arrays and more user-friendly\ndictionaries.\n\n\nThese read/write routines are very literal; there is almost no value or type\nchecking, except for byteorder and header/data array length.  File- and array-\nbased checking routines are provided for additional checks where desired.\n\n\npysac.sactrace\n\n\nContain the SACTrace class, which is the main user-facing interface to the SAC\nfile format.\n\n\nThe SACTrace object maintains consistency between SAC headers and manages\nheader values in a user-friendly way. This includes some value-checking, native\nPython logicals (True, False) and nulls (None) instead of SAC's 0, 1, or -12345...\n\n\nSAC headers are implemented as properties, with appropriate getters and setters.", 
             "title": "Manual"
         }, 
         {
-            "location": "/manual/index.html#manual", 
+            "location": "/manual/index.html#package-organization", 
             "text": "", 
-            "title": "Manual"
+            "title": "Package Organization"
         }, 
         {
             "location": "/manual/index.html#pysacheader", 
@@ -52,7 +52,7 @@
         }, 
         {
             "location": "/manual/index.html#pysacsactrace", 
-            "text": "Object-oriented interface to the SAC file format.  The SACTrace object maintains consistency between SAC headers and manages\nheader values in a user-friendly way. This includes some value-checking, native\nPython logicals (True, False) and nulls (None) instead of SAC's 0, 1, or -12345...  SAC headers are implemented as properties, with appropriate getters and setters.", 
+            "text": "Contain the SACTrace class, which is the main user-facing interface to the SAC\nfile format.  The SACTrace object maintains consistency between SAC headers and manages\nheader values in a user-friendly way. This includes some value-checking, native\nPython logicals (True, False) and nulls (None) instead of SAC's 0, 1, or -12345...  SAC headers are implemented as properties, with appropriate getters and setters.", 
             "title": "pysac.sactrace"
         }, 
         {

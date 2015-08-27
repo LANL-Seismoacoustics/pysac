@@ -62,7 +62,7 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#manual">Manual</a></li>
+                <li class="toctree-l3"><a href="#package-organization">Package Organization</a></li>
                 
                     <li><a class="toctree-l4" href="#pysacheader">pysac.header</a></li>
                 
@@ -136,7 +136,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="manual">Manual<a class="headerlink" href="#manual" title="Permanent link">&para;</a></h1>
+                <h1 id="package-organization">Package Organization<a class="headerlink" href="#package-organization" title="Permanent link">&para;</a></h1>
 <h2 id="pysacheader">pysac.header<a class="headerlink" href="#pysacheader" title="Permanent link">&para;</a></h2>
 <p>SAC header specification, including documentation.</p>
 <p>Header names, order, and types, nulls, as well as allowed enumerated values, are
@@ -157,7 +157,8 @@ dictionaries.</p>
 checking, except for byteorder and header/data array length.  File- and array-
 based checking routines are provided for additional checks where desired.</p>
 <h2 id="pysacsactrace">pysac.sactrace<a class="headerlink" href="#pysacsactrace" title="Permanent link">&para;</a></h2>
-<p>Object-oriented interface to the SAC file format.</p>
+<p>Contain the SACTrace class, which is the main user-facing interface to the SAC
+file format.</p>
 <p>The SACTrace object maintains consistency between SAC headers and manages
 header values in a user-friendly way. This includes some value-checking, native
 Python logicals (True, False) and nulls (None) instead of SAC's 0, 1, or -12345...</p>
