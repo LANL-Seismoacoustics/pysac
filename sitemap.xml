@@ -20,13 +20,13 @@
     
         
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//obspy/index.html</loc>
+     <loc>http://jkmacc-lanl.github.io/pysac//license/index.html</loc>
      <lastmod>2015-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//license/index.html</loc>
+     <loc>http://jkmacc-lanl.github.io/pysac//obspy/index.html</loc>
      <lastmod>2015-08-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
