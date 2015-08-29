@@ -143,9 +143,16 @@
 specified here.  Header name strings, and their array order are contained in
 separate float, int, and string tuples.  Enumerated values, and their allowed
 string and integer values, are in dictionaries.  Header value documentation is
-in a dictionary, for reuse throughout the package.</p>
+in a dictionary, <code>DOC</code>, for reuse throughout the package.</p>
 <h2 id="pysacutil">pysac.util<a class="headerlink" href="#pysacutil" title="Permanent link">&para;</a></h2>
-<p>SAC module helper functions and data.</p>
+<p>PySAC helper functions and data.  Contains functions to validate and convert
+enumerated values, byteorder consistency checking, and SAC reference time
+reading.</p>
+<p>Two of the most important functions in this module are <code>sac_to_obspy_header</code>
+and <code>obspy_to_sac_header</code>.  These contain the conversion routines between SAC
+header dictionaries and ObsPy header dictionaries.  <strong>These functions control
+the way ObsPy reads and writes SAC files,</strong> which was one of the main
+motivations for authoring this package.</p>
 <h2 id="pysacarrayio">pysac.arrayio<a class="headerlink" href="#pysacarrayio" title="Permanent link">&para;</a></h2>
 <p>Low-level array interface to the SAC file format.</p>
 <p>Functions in this module work directly with numpy arrays that mirror the SAC
@@ -157,12 +164,81 @@ dictionaries.</p>
 checking, except for byteorder and header/data array length.  File- and array-
 based checking routines are provided for additional checks where desired.</p>
 <h2 id="pysacsactrace">pysac.sactrace<a class="headerlink" href="#pysacsactrace" title="Permanent link">&para;</a></h2>
-<p>Contain the SACTrace class, which is the main user-facing interface to the SAC
-file format.</p>
-<p>The SACTrace object maintains consistency between SAC headers and manages
+<p>Contains the <code>SACTrace</code> class, which is the main user-facing interface to the
+SAC file format.</p>
+<p>The <code>SACTrace</code> object maintains consistency between SAC headers and manages
 header values in a user-friendly way. This includes some value-checking, native
-Python logicals (True, False) and nulls (None) instead of SAC's 0, 1, or -12345...</p>
-<p>SAC headers are implemented as properties, with appropriate getters and setters.</p>
+Python logicals and nulls instead of SAC's header-dependent logical/null
+representation.</p>
+<h3 id="reading-and-writing-sac-files">Reading and writing SAC files<a class="headerlink" href="#reading-and-writing-sac-files" title="Permanent link">&para;</a></h3>
+<p>PySAC can read and write evenly-spaced time-series files.  It supports big or
+little-endian binary files, or alphanumeric/ASCII files.</p>
+<pre><code class="python"># read from a binary file
+sac = SACTrace.read(filename)
+
+# read header only
+sac = SACTrace.read(filename, headonly=True)
+
+# write header-only, file must exist
+sac.write(filename, headonly=True)
+
+# read from an ASCII file
+sac = SACTrace.read(filename, ascii=True)
+
+# write a binary SAC file for a Sun machine
+sac.write(filename, byteorder='big')
+</code></pre>
+
+<h3 id="headers">Headers<a class="headerlink" href="#headers" title="Permanent link">&para;</a></h3>
+<p>In the <code>SACTrace</code> class, SAC headers are implemented as properties, with
+appropriate <em>getters</em> and <em>setters</em>.  The getters/setters translate user-facing
+native Python values like <code>True</code>, <code>False</code>, and <code>None</code> to the appropriate SAC
+header values, like <code>1</code>, <code>0</code>, <code>-12345</code>, <code>'-12345   '</code>, etc.  </p>
+<p>Header values that depend on the SAC <code>.data</code> vector are calculated on-the-fly,
+and fall back to the stored header value or <code>None</code> if the <code>.data</code> is <code>None</code> (the
+file was read in as <code>headonly=True</code>.</p>
+<p>A convenient read-only dictionary of non-null, raw SAC header values is
+available as <code>SACTrace._header</code>.  Formatted non-null headers are viewable using
+<code>print(sac)</code> or the <code>.lh()</code> or <code>listhdr()</code> methods.  Relative time headers and
+picks are viewable with <code>lh('picks')</code>.</p>
+<h3 id="reference-time-and-relative-time-header-handling">Reference time and relative time header handling<a class="headerlink" href="#reference-time-and-relative-time-header-handling" title="Permanent link">&para;</a></h3>
+<p>The SAC reference time is built from "nz..." time fields in the header, and it
+is available as the attribute <code>.reftime</code>, an ObsPy <code>UTCDateTime</code> instance.
+<code>reftime</code> can be modified in two ways: by resetting it with a new absolute
+<code>UTCDateTime</code> instance, or by adding/subtracting seconds from it.  <strong>Modifying
+the <code>reftime</code> will also modify all relative time headers such that they are
+still correct in an absolute sense</strong>.  This includes
+<code>a</code>, <code>b</code>, <code>e</code>, <code>f</code>, <code>o</code>, and <code>t1</code>-<code>t9</code>.  This means that adjusting the
+reference time does not invalidate the origin time, the first sample time, or
+any picks!</p>
+<p>Here, we build a 100-second <code>SACTrace</code> that starts at Y2K.</p>
+<pre><code class="python">sac = SACTrace(nzyear=2000, nzjday=1, nzhour=0, nzmin=0, nzsec=0, nzmsec=0,
+               t1=23.5, data=numpy.arange(101))
+
+sac.reftime
+sac.b, sac.e, sac.t1
+</code></pre>
+
+<pre><code>2000-01-01T00:00:00.000000Z
+(0.0, 100.0, 23.5)
+</code></pre>
+
+<p>Move reference time by relative seconds, relative time headers are preserved.</p>
+<pre><code class="python">sac.reftime -= 2.5
+sac.b, sac.e, sac.t1
+</code></pre>
+
+<pre><code>(2.5, 102.5, 26.0)
+</code></pre>
+
+<p>Set reference time to new absolute time, two minutes later.  Relative time
+ headers are preserved.</p>
+<pre><code class="python">sac.reftime = UTCDateTime(2000, 1, 1, 0, 2, 0, 0)
+sac.b, sac.e
+</code></pre>
+
+<pre><code>(-120.0, -20.0, -96.5)
+</code></pre>
               
             </div>
           </div>
