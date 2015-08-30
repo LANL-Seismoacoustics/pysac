@@ -29,14 +29,21 @@ motivations for authoring this package.
 Low-level array interface to the SAC file format.
 
 Functions in this module work directly with numpy arrays that mirror the SAC
-format.  The 'primitives' in this module are the float, int, and string header
-arrays, the float data array, and a header dictionary. Convenience functions
-are provided to convert between header arrays and more user-friendly
-dictionaries.
+format, and comprise much of the machinery that underlies the `SACTrace` class.
+The 'primitives' in this module are the float, int, and string header arrays,
+the float data array, and a header dictionary. Convenience functions are
+provided to convert between header arrays and more user-friendly dictionaries.
 
 These read/write routines are very literal; there is almost no value or type
 checking, except for byteorder and header/data array length.  File- and array-
 based checking routines are provided for additional checks where desired.
+
+Reading and writing are done with `read_sac` and `write_sac` for binary SAC
+files, and `read_sac_ascii` and `write_sac_ascii` for alphanumeric files.
+Conversions between header dictionaries and the three SAC header arrays are done
+with the `header_arrays_to_dict` and `dict_to_header_arrays` functions.
+Validation of header values and data is managed by `validate_sac_content`,
+which can currently do six different tests.
 
 
 ## pysac.sactrace
