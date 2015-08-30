@@ -156,13 +156,19 @@ motivations for authoring this package.</p>
 <h2 id="pysacarrayio">pysac.arrayio<a class="headerlink" href="#pysacarrayio" title="Permanent link">&para;</a></h2>
 <p>Low-level array interface to the SAC file format.</p>
 <p>Functions in this module work directly with numpy arrays that mirror the SAC
-format.  The 'primitives' in this module are the float, int, and string header
-arrays, the float data array, and a header dictionary. Convenience functions
-are provided to convert between header arrays and more user-friendly
-dictionaries.</p>
+format, and comprise much of the machinery that underlies the <code>SACTrace</code> class.
+The 'primitives' in this module are the float, int, and string header arrays,
+the float data array, and a header dictionary. Convenience functions are
+provided to convert between header arrays and more user-friendly dictionaries.</p>
 <p>These read/write routines are very literal; there is almost no value or type
 checking, except for byteorder and header/data array length.  File- and array-
 based checking routines are provided for additional checks where desired.</p>
+<p>Reading and writing are done with <code>read_sac</code> and <code>write_sac</code> for binary SAC
+files, and <code>read_sac_ascii</code> and <code>write_sac_ascii</code> for alphanumeric files.
+Conversions between header dictionaries and the three SAC header arrays are done
+with the <code>header_arrays_to_dict</code> and <code>dict_to_header_arrays</code> functions.
+Validation of header values and data is managed by <code>validate_sac_content</code>,
+which can currently do six different tests.</p>
 <h2 id="pysacsactrace">pysac.sactrace<a class="headerlink" href="#pysacsactrace" title="Permanent link">&para;</a></h2>
 <p>Contains the <code>SACTrace</code> class, which is the main user-facing interface to the
 SAC file format.</p>
@@ -195,8 +201,7 @@ appropriate <em>getters</em> and <em>setters</em>.  The getters/setters translat
 native Python values like <code>True</code>, <code>False</code>, and <code>None</code> to the appropriate SAC
 header values, like <code>1</code>, <code>0</code>, <code>-12345</code>, <code>'-12345   '</code>, etc.  </p>
 <p>Header values that depend on the SAC <code>.data</code> vector are calculated on-the-fly,
-and fall back to the stored header value or <code>None</code> if the <code>.data</code> is <code>None</code> (the
-file was read in as <code>headonly=True</code>.</p>
+and fall back to the stored header value.</p>
 <p>A convenient read-only dictionary of non-null, raw SAC header values is
 available as <code>SACTrace._header</code>.  Formatted non-null headers are viewable using
 <code>print(sac)</code> or the <code>.lh()</code> or <code>listhdr()</code> methods.  Relative time headers and
