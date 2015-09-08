@@ -87,8 +87,7 @@ native Python values like `True`, `False`, and `None` to the appropriate SAC
 header values, like `1`, `0`, `-12345`, `'-12345   '`, etc.  
 
 Header values that depend on the SAC `.data` vector are calculated on-the-fly,
-and fall back to the stored header value or `None` if the `.data` is `None` (the
-file was read in as `headonly=True`.
+and fall back to the stored header value.
 
 A convenient read-only dictionary of non-null, raw SAC header values is
 available as `SACTrace._header`.  Formatted non-null headers are viewable using
