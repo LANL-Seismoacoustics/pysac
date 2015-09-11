@@ -10,6 +10,9 @@ File-type support:
 * evenly-sampled data
 * time-series, not spectra
 
+[Project page](https://jkmacc-lanl.github.io/pysac)  
+[Repository](https://github.com/jkmacc-LANL/pysac)
+
 ## Goals
 
 1. Expose the file format in a way that is intuitive to SAC users and to Python
