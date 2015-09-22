@@ -7,10 +7,11 @@ use_directory_urls: false
 markdown_extensions:
     - toc:
         permalink: True
-docs_dir: 'docs'
+docs_dir: 'source'
+site_dir: 'site'
 pages:
 - Introduction: 'index.md'
-- Manual: 'manual.md'
+- Package: 'package.md'
 - About:
     - 'License': 'license.md'
     - 'ObsPy': 'obspy.md'
