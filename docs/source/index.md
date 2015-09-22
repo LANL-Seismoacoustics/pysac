@@ -11,7 +11,8 @@ File-type support:
 * time-series, not spectra
 
 [Project page](https://jkmacc-lanl.github.io/pysac)  
-[Repository](https://github.com/jkmacc-LANL/pysac)
+[Repository](https://github.com/jkmacc-LANL/pysac)  
+[Docs PDF](manual.pdf)  
 
 ## Goals
 
