@@ -1,4 +1,4 @@
-## Relationship to ObsPy
+# Relationship to ObsPy
 
 PySAC is largely re-written from the
 [obspy.io.sac](https://github.com/obspy/obspy/tree/master/obspy/io/sac) module,
