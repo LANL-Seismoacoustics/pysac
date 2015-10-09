@@ -3,16 +3,16 @@
 
     
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//index.html</loc>
-     <lastmod>2015-09-22</lastmod>
+     <loc>http://lanl-seismoacoustics.github.io/pysac//index.html</loc>
+     <lastmod>2015-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//package/index.html</loc>
-     <lastmod>2015-09-22</lastmod>
+     <loc>http://lanl-seismoacoustics.github.io/pysac//package/index.html</loc>
+     <lastmod>2015-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,14 +20,14 @@
     
         
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//license/index.html</loc>
-     <lastmod>2015-09-22</lastmod>
+     <loc>http://lanl-seismoacoustics.github.io/pysac//license/index.html</loc>
+     <lastmod>2015-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>http://jkmacc-lanl.github.io/pysac//obspy/index.html</loc>
-     <lastmod>2015-09-22</lastmod>
+     <loc>http://lanl-seismoacoustics.github.io/pysac//obspy/index.html</loc>
+     <lastmod>2015-10-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
