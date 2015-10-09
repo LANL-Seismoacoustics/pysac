@@ -10,8 +10,8 @@ File-type support:
 * evenly-sampled data
 * time-series, not spectra
 
-[Project page](https://jkmacc-lanl.github.io/pysac)  
-[Repository](https://github.com/jkmacc-LANL/pysac)  
+[Project page](https://lanl-seismoacoustics.github.io/pysac)  
+[Repository](https://github.com/LANL-Seismoacoustics/pysac)  
 [Docs PDF](manual.pdf)  
 
 ## Goals
