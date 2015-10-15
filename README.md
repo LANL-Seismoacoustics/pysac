@@ -11,7 +11,7 @@ File-type support:
 * time-series, not spectra
 
 [Project page](https://lanl-seismoacoustics.github.io/pysac)  
-[Repository](https://github.com/lanl-seismoacoustics/pysac)
+[Repository](https://github.com/lanl-seismoacoustics/pysac)  
 [LANL Seismoacoustics](https://lanl-seismoacoustics.github.io/)
 
 ## Goals
