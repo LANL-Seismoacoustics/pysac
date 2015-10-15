@@ -12,6 +12,7 @@ File-type support:
 
 [Project page](https://jkmacc-lanl.github.io/pysac)  
 [Repository](https://github.com/jkmacc-LANL/pysac)
+[LANL Seismoacoustics](https://lanl-seismoacoustics.github.io/)
 
 ## Goals
 
