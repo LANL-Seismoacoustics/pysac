@@ -14,3 +14,5 @@ from __future__ import (absolute_import, division, print_function,
 from future.builtins import *  # NOQA
 
 from .sactrace import SACTrace
+
+__version__ = '0.2.0'
