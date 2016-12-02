@@ -11,7 +11,7 @@ from glob import glob
 from distutils.core import setup, Extension
 
 setup(name = 'pysac',
-      version = '0.0.1',
+      version = '0.2.0',
       description = 'Python interface to the Seismic Analsys Code file format.',
       author = 'J. MacCarthy',
       author_email = 'jkmacc@lanl.gov',
