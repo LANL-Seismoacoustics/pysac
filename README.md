@@ -1,3 +1,5 @@
+**NOTE**: this repository has been archived.  PySAC was incorporated into [ObsPy's SAC plugin](https://github.com/obspy/obspy/tree/master/obspy/io/sac), which is where development and maintenance is happening.
+
 # PySAC
 
 Python interface to the [Seismic Analysis
